@@ -2,8 +2,8 @@ package entelect.training.incubator.spring.customer.controller;
 
 import entelect.training.incubator.spring.customer.model.Customer;
 import entelect.training.incubator.spring.customer.model.CustomerSearchRequest;
-import entelect.training.incubator.spring.customer.model.SearchType;
 import entelect.training.incubator.spring.customer.service.CustomersService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -14,15 +14,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("customers")
+@RequiredArgsConstructor
 public class CustomersController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(CustomersController.class);
 
     private final CustomersService customersService;
-
-    public CustomersController(CustomersService customersService) {
-        this.customersService = customersService;
-    }
 
     @PostMapping
     public ResponseEntity<?> createCustomer(@RequestBody Customer customer) {

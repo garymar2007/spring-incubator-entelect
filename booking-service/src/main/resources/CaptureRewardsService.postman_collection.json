@@ -1,0 +1,93 @@
+{
+  "info": {
+    "_postman_id": "46f8f766-3850-44bd-8f6f-58a6da4488de",
+    "name": "CountriesPortService",
+    "description": "\n",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "13842218"
+  },
+  "item": [
+    {
+      "name": "captureRewards",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:gs=\"http://entelect.training/incubator/spring-loyalty-service\">\n    <soap:Body>\n        <gs:captureRewardsRequest>\n            <gs:passport>123456</gs:name>\n <gs:amount>1</gs:name>\n       </gs:captureRewardsRequest>\n    </soap:Body>\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{LoyaltySoap11BaseUrl}}/ws",
+          "host": [
+            "{{LoyaltySoap11BaseUrl}}"
+          ],
+          "path": [
+            "ws"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "captureRewards response",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <error>The element or type could not be found undefined</error>\n  </soap:Body>\n</soap:Envelope>\n",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8208/ws",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8208",
+              "path": [
+                "ws"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "xml",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/xml; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <error>The element or type could not be found undefined</error>\n  </soap:Body>\n</soap:Envelope>\n"
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "LoyaltySoap11BaseUrl",
+      "value": "http://localhost:8208",
+      "type": "any"
+    }
+  ]
+}
