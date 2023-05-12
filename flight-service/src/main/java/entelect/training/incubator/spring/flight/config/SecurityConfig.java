@@ -29,23 +29,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("123456").roles("USER");
-        auth.inMemoryAuthentication().withUser("admin").password("garymar").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("user").password("{noop}123456").roles("USER");
+        auth.inMemoryAuthentication().withUser("loyalty").password("{noop}garymar").roles("LOYALTY");
+        auth.inMemoryAuthentication().withUser("admin").password("{noop}garymar").roles("ADMIN");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable() // !!! Disclaimer: NEVER DISABLE CSRF IN PRODUCTION !!!
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/flights/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/flights/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/flights/specails/**").hasRole( "LOYALTY")
+//                .antMatchers(HttpMethod.GET, "/flights/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/flights/**").hasRole( "ADMIN")
 //                .anyRequest().denyAll()
                 .and()
                 .httpBasic();
-    }
-
-    @Bean
-    public static NoOpPasswordEncoder passwordEncoder() {
-        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
     }
 }

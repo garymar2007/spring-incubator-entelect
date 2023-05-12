@@ -1,6 +1,5 @@
 package entelect.training.incubator.spring.booking.service;
 
-import com.google.gson.Gson;
 import entelect.training.incubator.spring.booking.dto.Customer;
 import entelect.training.incubator.spring.booking.dto.Flight;
 import entelect.training.incubator.spring.booking.dto.Notification;

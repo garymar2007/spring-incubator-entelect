@@ -23,6 +23,8 @@
         <module>customer-service</module>
         <module>notification-service</module>
         <module>loyalty-service</module>
+        <module>booking-service</module>
+        <module>security-service</module>
     </modules>
 
     <properties>

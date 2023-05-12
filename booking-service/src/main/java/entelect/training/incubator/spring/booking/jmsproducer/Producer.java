@@ -1,11 +1,9 @@
 package entelect.training.incubator.spring.booking.jmsproducer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import entelect.training.incubator.spring.booking.dto.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
 
 import javax.jms.*;

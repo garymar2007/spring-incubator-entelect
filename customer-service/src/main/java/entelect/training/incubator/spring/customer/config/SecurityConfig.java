@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("123456").roles("USER");
+        auth.inMemoryAuthentication().withUser("user").password("{noop}123456").roles("USER");
         auth.inMemoryAuthentication().withUser("admin").password("{noop}garymar").roles("ADMIN");
     }
 
@@ -45,10 +45,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .httpBasic();
     }
-
-//    @Bean
-//    public static NoOpPasswordEncoder passwordEncoder() {
-//        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-//    }
-
 }
