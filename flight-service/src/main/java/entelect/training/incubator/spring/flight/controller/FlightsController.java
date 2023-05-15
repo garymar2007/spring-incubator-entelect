@@ -5,6 +5,9 @@ import entelect.training.incubator.spring.flight.model.FlightsSearchRequest;
 import entelect.training.incubator.spring.flight.service.FlightsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +32,11 @@ public class FlightsController {
     }
 
     @PostMapping
+    @Caching(evict = {
+            @CacheEvict("flights"),
+            @CacheEvict("flightsById"),
+            @CacheEvict("flightsByFilter")
+    })
     public ResponseEntity<?> createFlight(@RequestBody Flight flight) {
         LOGGER.info("Processing flight creation request for flight={}", flight);
 
@@ -39,6 +47,7 @@ public class FlightsController {
     }
 
     @GetMapping()
+    @Cacheable("flights")
     public ResponseEntity<?> getFlights() {
         LOGGER.info("Fetching all flights");
         List<Flight> flights = this.flightsService.getFlights();
@@ -53,6 +62,7 @@ public class FlightsController {
     }
 
     @GetMapping("{id}")
+    @Cacheable("flightsById")
     public ResponseEntity<?> getFlightById(@PathVariable Integer id) {
         LOGGER.info("Processing flight search request for flight id={}", id);
         Flight flight = this.flightsService.getFlight(id);
@@ -67,6 +77,7 @@ public class FlightsController {
     }
 
     @PostMapping("/search")
+    @Cacheable("flightsByFilter")
     public ResponseEntity<?> searchFlights(@RequestBody FlightsSearchRequest searchRequest) {
         LOGGER.info("Processing flight search request: {}", searchRequest);
 

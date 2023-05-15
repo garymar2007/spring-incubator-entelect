@@ -57,5 +57,29 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.7.0</version>
         </dependency>
+        <!--Spring cache abstraction-->
+        <!--dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.3.3</version>
+        </dependency-->
+        <!--Since the spring-context-support module transitively depends on the spring-context module,
+        there is no need for a separate dependency declaration for the spring-context.-->
+        <!--dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>5.3.3</version>
+        </dependency-->
+
+        <!--If we use Spring Boot, then we can utilize the spring-boot-starter-cache starter package to easily
+        add the caching dependencies,  the starter brings the spring-context-support module.-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
     </dependencies>
 </project>
