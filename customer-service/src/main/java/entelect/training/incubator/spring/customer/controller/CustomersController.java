@@ -3,6 +3,7 @@ package entelect.training.incubator.spring.customer.controller;
 import entelect.training.incubator.spring.customer.model.Customer;
 import entelect.training.incubator.spring.customer.model.CustomerSearchRequest;
 import entelect.training.incubator.spring.customer.service.CustomersService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ public class CustomersController {
     private final CustomersService customersService;
 
     @PostMapping
+    @Operation(summary = "create a new customer")
     public ResponseEntity<?> createCustomer(@RequestBody Customer customer) {
         LOGGER.info("Processing customer creation request for customer={}", customer);
 
@@ -32,6 +34,7 @@ public class CustomersController {
     }
 
     @GetMapping
+    @Operation(summary = "get all customers")
     public ResponseEntity<?> getCustomers() {
         LOGGER.info("Fetching all customers");
         List<Customer> customers = customersService.getCustomers();
@@ -45,6 +48,7 @@ public class CustomersController {
         return ResponseEntity.notFound().build();
     }
 
+    @Operation(summary = "get a customer based on customer id")
     @GetMapping("{id}")
     public ResponseEntity<?> getCustomerById(@PathVariable Integer id) {
         LOGGER.info("Processing customer search request for customer id={}", id);

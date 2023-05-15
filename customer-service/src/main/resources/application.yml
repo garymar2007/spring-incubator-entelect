@@ -1,6 +1,22 @@
+# In production environment Swagger UI should be disabled for security reason
+#springdoc:
+#  swagger-ui:
+#    enabled: false
+
+springdoc:
+  use-management-port: true
+
+management:
+  server:
+    port:9201
+  endpoints:
+    web:
+      exposure:
+        include: openapi, swaggerui
+
 spring:
   application:
-    name: flight-service
+    name: customer-service
   datasource:
     driver-class-name: org.hsqldb.jdbc.JDBCDriver
     url: jdbc:hsqldb:mem:testdb;DB_CLOSE_DELAY=-1

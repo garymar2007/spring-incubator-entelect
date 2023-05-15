@@ -39,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable() // !!! Disclaimer: NEVER DISABLE CSRF IN PRODUCTION !!!
                 .authorizeRequests()
+                .antMatchers("/api-docs/**","/actuator/**", "/swagger-ui/**","/swagger-ui.html", "/swagger-ui-custom.html").permitAll()
                 .antMatchers(HttpMethod.GET, "/customers/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.POST, "/customers/**").hasAnyRole("SYSTEM", "ADMIN")
                 .anyRequest().denyAll()

@@ -12,6 +12,13 @@
     <groupId>entelect.training.incubator.spring.customer</groupId>
     <artifactId>customer-service</artifactId>
 
+    <properties>
+        <springdoc.version>1.7.0</springdoc.version>
+        <asciidoctor-plugin.version>1.5.6</asciidoctor-plugin.version>
+        <snippetsDirectory>target/generated-snippets</snippetsDirectory>
+        <springdoc-openapi-maven-plugin.version>1.4</springdoc-openapi-maven-plugin.version>
+    </properties>
+
     <dependencies>
         <!-- Spring dependencies -->
         <dependency>
@@ -60,5 +67,52 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>
+        <!--Spring rest open API documentation-->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.7.0</version>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>pre-integration-test</id>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>post-integration-test</id>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-maven-plugin</artifactId>
+                <version>0.2</version>
+                <executions>
+                    <execution>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <apiDocsUrl>http://localhost:9201/actuator/openapi/springdocDefault</apiDocsUrl>
+                    <outputFileName>openapi.json</outputFileName>
+                    <outputDir>${project.build.directory}/target</outputDir>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
